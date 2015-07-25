@@ -42,4 +42,9 @@ public class PlayerController : MonoBehaviour {
 	void FireBullet () {
 		Instantiate(this.bullet, this.transform.position + (this.transform.rotation * Vector3.up * .5f), this.transform.rotation);
 	}
+
+	public void Explode () {
+		this.gameObject.SetActive (false);
+		Destroy (this.gameObject);
+	}
 }

@@ -25,6 +25,10 @@ public class BulletController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
+		if (collision.collider.tag == "Player")
+		{
+			collision.collider.GetComponent<PlayerController>().Explode();
+		}
 		this.Explode ();
 	}
 }
