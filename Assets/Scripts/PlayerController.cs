@@ -45,6 +45,5 @@ public class PlayerController : MonoBehaviour {
 
 	public void Explode () {
 		this.gameObject.SetActive (false);
-		Destroy (this.gameObject);
 	}
 }
