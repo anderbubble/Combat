@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
@@ -7,8 +8,22 @@ public class PlayerController : MonoBehaviour {
 	public string MoveAxis = "Vertical";
 	public string FireButton = "Fire";
 	public GameObject bullet;
+	public Text ScoreUI;
 
 	private Rigidbody2D Rigidbody;
+
+	private int _Score = 0;
+	
+	public int Score {
+		get {
+			return this._Score;
+		}
+		
+		set {
+			this._Score = value;
+			this.ScoreUI.text = this._Score.ToString();
+		}
+	}
 
 	void Start () {
 		this.Rigidbody = this.GetComponent<Rigidbody2D>();
