@@ -7,13 +7,26 @@ public class PlayerController : MonoBehaviour {
 	public string TurnAxis = "Horizontal";
 	public string MoveAxis = "Vertical";
 	public string FireButton = "Fire";
-	public GameObject bullet;
+	public BulletController bullet;
 	public Text ScoreUI;
 
 	private Rigidbody2D Rigidbody;
 
 	private int _Score = 0;
-	
+
+	public bool alive {
+		get {
+			return (
+				this.GetComponent<SpriteRenderer>().enabled
+				&& this.GetComponent<BoxCollider2D>().enabled);
+		}
+
+		set {
+			this.GetComponent<SpriteRenderer>().enabled = value;
+			this.GetComponent<BoxCollider2D>().enabled = value;
+		}
+	}
+
 	public int Score {
 		get {
 			return this._Score;
@@ -30,12 +43,14 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void Update () {
-		var moving = MovePlayer();
-		if (moving) {
-			DampenVelocity();
-		}
-		if (Input.GetButtonDown (this.FireButton)) {
-			FireBullet();
+		if (this.alive) {
+			var moving = MovePlayer();
+			if (moving) {
+				DampenVelocity();
+			}
+			if (Input.GetButtonDown (this.FireButton)) {
+				FireBullet();
+			}
 		}
 	}
 
@@ -55,10 +70,24 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FireBullet () {
-		Instantiate(this.bullet, this.transform.position + (this.transform.rotation * Vector3.up * .5f), this.transform.rotation);
+		var Bullet = 
+			Instantiate(this.bullet, this.transform.position + (this.transform.rotation * Vector3.up * .5f), this.transform.rotation)
+				as BulletController;
+		Bullet.source = this;
 	}
 
-	public void Explode () {
-		this.gameObject.SetActive (false);
+	public void Explode (PlayerController PointTo=null) {
+		this.DampenVelocity();
+		if (PointTo != null)
+		{
+			PointTo.Score += 1;
+		}
+		this.alive = false;
+		StartCoroutine(this.WaitRespawn ());
+	}
+
+	IEnumerator WaitRespawn (float seconds=3) {
+		yield return new WaitForSeconds(seconds);
+		this.alive = true;
 	}
 }
