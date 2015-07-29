@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 
 	public string TurnAxis = "Horizontal";
 	public string MoveAxis = "Vertical";
 	public string FireButton = "Fire";
-	public BulletController bullet;
+	public BulletController BulletTemplate;
 	public Text ScoreUI;
 	private bool loaded = true;
 	public float ReloadTime = 0.5f;
+	private HashSet<BulletController> FiredBullets;
+	public int MaxBullets = 1;
 
 	private Rigidbody2D Rigidbody;
 
@@ -29,6 +32,12 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public int CountActiveBullets ()
+	{
+		this.FiredBullets.RemoveWhere(x => x == null);
+		return this.FiredBullets.Count;
+	}
+
 	public int Score {
 		get {
 			return this._Score;
@@ -42,6 +51,8 @@ public class PlayerController : MonoBehaviour {
 
 	void Start () {
 		this.Rigidbody = this.GetComponent<Rigidbody2D>();
+		this.FiredBullets = new HashSet<BulletController>();
+
 	}
 	
 	void Update () {
@@ -50,7 +61,7 @@ public class PlayerController : MonoBehaviour {
 			if (moving) {
 				DampenVelocity();
 			}
-			if (this.loaded && Input.GetButtonDown (this.FireButton)) {
+			if (this.loaded && Input.GetButtonDown (this.FireButton) && this.CountActiveBullets() < this.MaxBullets) {
 				FireBullet();
 			}
 		}
@@ -73,9 +84,10 @@ public class PlayerController : MonoBehaviour {
 
 	void FireBullet () {
 		var Bullet = 
-			Instantiate(this.bullet, this.transform.position + (this.transform.rotation * Vector3.up * .5f), this.transform.rotation)
+			Instantiate(this.BulletTemplate, this.transform.position + (this.transform.rotation * Vector3.up * .5f), this.transform.rotation)
 				as BulletController;
 		Bullet.source = this;
+		this.FiredBullets.Add (Bullet);
 		this.loaded = false;
 		StartCoroutine (this.Reload(this.ReloadTime));
 	}
