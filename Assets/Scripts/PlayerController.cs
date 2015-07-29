@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
 	public float ReloadTime = 0.5f;
 	private HashSet<BulletController> FiredBullets;
 	public int MaxBullets = 1;
+	public float BulletSpeed;
 
 	private Rigidbody2D Rigidbody;
 
@@ -87,6 +88,8 @@ public class PlayerController : MonoBehaviour {
 			Instantiate(this.BulletTemplate, this.transform.position + (this.transform.rotation * Vector3.up * .5f), this.transform.rotation)
 				as BulletController;
 		Bullet.source = this;
+		if (this.BulletSpeed != null)
+			Bullet.speed = this.BulletSpeed;
 		this.FiredBullets.Add (Bullet);
 		this.loaded = false;
 		StartCoroutine (this.Reload(this.ReloadTime));
