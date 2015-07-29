@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
 	public string FireButton = "Fire";
 	public BulletController bullet;
 	public Text ScoreUI;
+	private bool loaded = true;
+	public float ReloadTime = 0.5f;
 
 	private Rigidbody2D Rigidbody;
 
@@ -48,7 +50,7 @@ public class PlayerController : MonoBehaviour {
 			if (moving) {
 				DampenVelocity();
 			}
-			if (Input.GetButtonDown (this.FireButton)) {
+			if (this.loaded && Input.GetButtonDown (this.FireButton)) {
 				FireBullet();
 			}
 		}
@@ -74,6 +76,8 @@ public class PlayerController : MonoBehaviour {
 			Instantiate(this.bullet, this.transform.position + (this.transform.rotation * Vector3.up * .5f), this.transform.rotation)
 				as BulletController;
 		Bullet.source = this;
+		this.loaded = false;
+		StartCoroutine (this.Reload(this.ReloadTime));
 	}
 
 	public void Explode (PlayerController PointTo=null) {
@@ -89,5 +93,10 @@ public class PlayerController : MonoBehaviour {
 	IEnumerator WaitRespawn (float seconds=3) {
 		yield return new WaitForSeconds(seconds);
 		this.alive = true;
+	}
+
+	IEnumerator Reload (float seconds) {
+		yield return new WaitForSeconds(seconds);
+		this.loaded = true;
 	}
 }
