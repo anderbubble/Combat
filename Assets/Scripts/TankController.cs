@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerController : MonoBehaviour {
+public class TankController : MonoBehaviour {
 
 	public string TurnAxis = "Horizontal";
 	public string MoveAxis = "Vertical";
@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 	private HashSet<BulletController> FiredBullets;
 	public int MaxBullets = 1;
 	public float BulletSpeed;
+	private Vector2 BulletOffset;
 
 	private Rigidbody2D Rigidbody;
 
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		this.Rigidbody = this.GetComponent<Rigidbody2D>();
 		this.FiredBullets = new HashSet<BulletController>();
-
+		this.BulletOffset = ((this.GetComponent<BoxCollider2D>().size.y / 2) + this.BulletTemplate.GetComponent<CircleCollider2D>().radius + .05f) * Vector2.up;
 	}
 	
 	void Update () {
@@ -85,17 +86,17 @@ public class PlayerController : MonoBehaviour {
 
 	void FireBullet () {
 		var Bullet = 
-			Instantiate(this.BulletTemplate, this.transform.position + (this.transform.rotation * Vector3.up * .5f), this.transform.rotation)
+			Instantiate(this.BulletTemplate, this.transform.position + (this.transform.rotation * this.BulletOffset), this.transform.rotation)
 				as BulletController;
 		Bullet.source = this;
-		if (this.BulletSpeed != null)
+		if (this.BulletSpeed != 0)
 			Bullet.speed = this.BulletSpeed;
 		this.FiredBullets.Add (Bullet);
 		this.loaded = false;
 		StartCoroutine (this.Reload(this.ReloadTime));
 	}
 
-	public void Explode (PlayerController PointTo=null) {
+	public void Explode (TankController PointTo=null) {
 		this.DampenVelocity();
 		if (PointTo != null)
 		{

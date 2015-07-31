@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BulletController : MonoBehaviour {
 
-	public PlayerController source;
+	public TankController source;
 	public float speed = 1;
 	public float lifespan = 1;
 
@@ -28,7 +28,7 @@ public class BulletController : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.collider.tag == "Player")
 		{
-			collision.collider.GetComponent<PlayerController>().Explode(PointTo: this.source);
+			collision.collider.GetComponent<TankController>().Explode(PointTo: this.source);
 		}
 		this.Explode ();
 	}
