@@ -12,7 +12,7 @@ public class TankController : MonoBehaviour {
 	public Text ScoreUI;
 	private bool loaded = true;
 	public float ReloadTime = 0.5f;
-	private HashSet<BulletController> FiredBullets;
+	private List<BulletController> Bullets;
 	public int MaxBullets = 1;
 	public float BulletSpeed;
 	private Vector2 BulletOffset;
@@ -34,10 +34,15 @@ public class TankController : MonoBehaviour {
 		}
 	}
 
+	public void CleanupBullets ()
+	{
+		this.Bullets.RemoveAll (x => (((BulletController)x).Equals (null)));
+	}
+
 	public int CountActiveBullets ()
 	{
-		this.FiredBullets.RemoveWhere(x => x == null);
-		return this.FiredBullets.Count;
+		this.CleanupBullets();
+		return this.Bullets.Count;
 	}
 
 	public int Score {
@@ -53,7 +58,7 @@ public class TankController : MonoBehaviour {
 
 	void Start () {
 		this.Rigidbody = this.GetComponent<Rigidbody2D>();
-		this.FiredBullets = new HashSet<BulletController>();
+		this.Bullets = new List<BulletController>();
 		this.BulletOffset = ((this.GetComponent<BoxCollider2D>().size.y / 2) + this.BulletTemplate.GetComponent<CircleCollider2D>().radius + .05f) * Vector2.up;
 	}
 	
@@ -63,6 +68,7 @@ public class TankController : MonoBehaviour {
 			if (moving) {
 				DampenVelocity();
 			}
+
 			if (this.loaded && Input.GetButtonDown (this.FireButton) && this.CountActiveBullets() < this.MaxBullets) {
 				FireBullet();
 			}
@@ -91,7 +97,7 @@ public class TankController : MonoBehaviour {
 		Bullet.source = this;
 		if (this.BulletSpeed != 0)
 			Bullet.speed = this.BulletSpeed;
-		this.FiredBullets.Add (Bullet);
+		this.Bullets.Add (Bullet);
 		this.loaded = false;
 		StartCoroutine (this.Reload(this.ReloadTime));
 	}
