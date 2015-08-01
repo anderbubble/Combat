@@ -26,10 +26,21 @@ public class BulletController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
-		if (collision.collider.tag == "Player")
-		{
-			collision.collider.GetComponent<TankController>().Explode(PointTo: this.source);
+		if (collision.collider.tag == "Player") {
+			var target = collision.collider.GetComponent<TankController>();
+			if (target == this.source) {
+				this.source.Score -= 1;
+			} else {
+				this.source.Score += 1;
+			}
+			target.Explode ();
+			this.Explode ();
+		} else if (collision.collider.tag == "Barrier") {
+			if (this.GetComponent<Collider2D>().sharedMaterial == null) {
+				this.Explode ();
+			}
+		} else {
+			this.Explode ();
 		}
-		this.Explode ();
 	}
 }

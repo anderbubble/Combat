@@ -52,6 +52,9 @@ public class TankController : MonoBehaviour {
 		
 		set {
 			this._Score = value;
+			if (this._Score < 0) {
+				this._Score = 0;
+			}
 			this.ScoreUI.text = this._Score.ToString();
 		}
 	}
@@ -102,12 +105,8 @@ public class TankController : MonoBehaviour {
 		StartCoroutine (this.Reload(this.ReloadTime));
 	}
 
-	public void Explode (TankController PointTo=null) {
+	public void Explode () {
 		this.DampenVelocity();
-		if (PointTo != null)
-		{
-			PointTo.Score += 1;
-		}
 		this.alive = false;
 		StartCoroutine(this.WaitRespawn ());
 	}

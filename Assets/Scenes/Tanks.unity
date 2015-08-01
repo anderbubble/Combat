@@ -335,7 +335,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 154334, guid: 1b452e57147b0486db41183b3dd0d088, type: 2}
       propertyPath: m_Name
-      value: Barrier2
+      value: NEBarrier
       objectReference: {fileID: 0}
     - target: {fileID: 470124, guid: 1b452e57147b0486db41183b3dd0d088, type: 2}
       propertyPath: m_LocalScale.y
@@ -424,7 +424,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 154334, guid: 1b452e57147b0486db41183b3dd0d088, type: 2}
       propertyPath: m_Name
-      value: Barrier1
+      value: NWBarrier
       objectReference: {fileID: 0}
     - target: {fileID: 470124, guid: 1b452e57147b0486db41183b3dd0d088, type: 2}
       propertyPath: m_LocalScale.y
@@ -578,6 +578,10 @@ Prefab:
     - target: {fileID: 470124, guid: 1b452e57147b0486db41183b3dd0d088, type: 2}
       propertyPath: m_LocalScale.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 154334, guid: 1b452e57147b0486db41183b3dd0d088, type: 2}
+      propertyPath: m_Name
+      value: CBarrier
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b452e57147b0486db41183b3dd0d088, type: 2}
@@ -965,7 +969,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 154334, guid: 1b452e57147b0486db41183b3dd0d088, type: 2}
       propertyPath: m_Name
-      value: Barrier4
+      value: SWBarrier
       objectReference: {fileID: 0}
     - target: {fileID: 470124, guid: 1b452e57147b0486db41183b3dd0d088, type: 2}
       propertyPath: m_LocalScale.y
@@ -1113,7 +1117,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 154334, guid: 1b452e57147b0486db41183b3dd0d088, type: 2}
       propertyPath: m_Name
-      value: Barrier3
+      value: SEBarrier
       objectReference: {fileID: 0}
     - target: {fileID: 470124, guid: 1b452e57147b0486db41183b3dd0d088, type: 2}
       propertyPath: m_LocalScale.y
