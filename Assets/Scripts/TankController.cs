@@ -98,8 +98,9 @@ public class TankController : MonoBehaviour {
 			Instantiate(this.BulletTemplate, this.transform.position + (this.transform.rotation * this.BulletOffset), this.transform.rotation)
 				as BulletController;
 		Bullet.source = this;
-		if (this.BulletSpeed != 0)
+		if (this.BulletSpeed != 0) {
 			Bullet.speed = this.BulletSpeed;
+		}
 		this.Bullets.Add (Bullet);
 		this.loaded = false;
 		StartCoroutine (this.Reload(this.ReloadTime));
