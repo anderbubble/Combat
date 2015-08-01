@@ -16,6 +16,7 @@ public class TankController : MonoBehaviour {
 	public int MaxBullets = 1;
 	public float BulletSpeed;
 	private Vector2 BulletOffset;
+	public GameObject Explosion;
 
 	private Rigidbody2D Rigidbody;
 
@@ -109,6 +110,7 @@ public class TankController : MonoBehaviour {
 	public void Explode () {
 		this.DampenVelocity();
 		this.alive = false;
+		Instantiate (this.Explosion, this.transform.position, Quaternion.identity);
 		StartCoroutine(this.WaitRespawn ());
 	}
 
