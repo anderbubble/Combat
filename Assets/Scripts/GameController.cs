@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour {
 			players = GameObject.FindGameObjectsWithTag("Player");
 		}
 		foreach (var Player in players) {
-			Player.GetComponent<TankController>().BulletTemplate = this.BouncyBulletTemplate;
+			Player.GetComponent<PlayerController>().BulletTemplate = this.BouncyBulletTemplate;
 		}
 		Destroy(this.gameObject);
 	}

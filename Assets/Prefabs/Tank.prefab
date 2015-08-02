@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11473916}
   - 50: {fileID: 5063806}
   - 61: {fileID: 6181510}
+  - 114: {fileID: 11498208}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Player
@@ -73,13 +74,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TurnAxis: Horizontal
   MoveAxis: Vertical
-  FireButton: Fire
-  BulletTemplate: {fileID: 11408898, guid: c0767ccf1e6a94f2c8d1a727f2b92141, type: 2}
-  ScoreUI: {fileID: 0}
-  ReloadTime: .5
-  MaxBullets: 1
-  BulletSpeed: 10
   Explosion: {fileID: 198646, guid: 10d0351efb68a4d11aa13ef64a0b1292, type: 2}
+--- !u!114 &11498208
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73887462bf6194c74aa6e0bf48cea636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Forward: {x: 0, y: 0, z: 0, w: 1}
+  BulletTemplate: {fileID: 11408898, guid: c0767ccf1e6a94f2c8d1a727f2b92141, type: 2}
+  MaxBullets: 1
+  BulletSpeed: 9
+  BulletOffset: {x: 0, y: 0}
+  ReloadTime: 0
+  FireButton: Fire
+  ScoreUI: {fileID: 0}
 --- !u!212 &21266164
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -157,7 +171,7 @@ Prefab:
         type: 2}
     - target: {fileID: 0}
       propertyPath: BulletSpeed
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Size.x
@@ -183,6 +197,14 @@ Prefab:
       propertyPath: Explosion
       value: 
       objectReference: {fileID: 198646, guid: 10d0351efb68a4d11aa13ef64a0b1292, type: 2}
+    - target: {fileID: 0}
+      propertyPath: ReloadTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Forward.w
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 136776}

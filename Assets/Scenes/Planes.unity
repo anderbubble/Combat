@@ -136,7 +136,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
+  m_BackGroundColor: {r: .298039228, g: .262745112, b: .298039228, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -185,6 +185,7 @@ GameObject:
   - 50: {fileID: 832762570}
   - 114: {fileID: 832762574}
   - 114: {fileID: 832762575}
+  - 114: {fileID: 832762576}
   m_Layer: 0
   m_Name: GreenPlane
   m_TagString: Untagged
@@ -283,3 +284,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 75648833}
+--- !u!114 &832762576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 832762569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73887462bf6194c74aa6e0bf48cea636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Forward: {x: 0, y: 0, z: -.699999988, w: .699999988}
+  BulletTemplate: {fileID: 11408898, guid: c0767ccf1e6a94f2c8d1a727f2b92141, type: 2}
+  MaxBullets: 1
+  BulletSpeed: 9
+  BulletOffset: {x: .600000024, y: 0}
+  ReloadTime: 0
+  FireButton: P1Fire
+  ScoreUI: {fileID: 0}

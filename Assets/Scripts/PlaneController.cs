@@ -4,14 +4,17 @@ using System.Collections;
 public class PlaneController : MonoBehaviour {
 	public float speed = 1f;
 
+	PlayerController Player;
+
 	public void Start () {
+		this.Player = this.GetComponent<PlayerController>();
 		var ScreenWrap = this.GetComponent<ScreenWrap>();
 		ScreenWrap.InstantiateGhosts();
 		ScreenWrap.DestroyComponent<PlaneController>();
 		ScreenWrap.DestroyComponent<Rigidbody2D>();
-		ScreenWrap.DestroyComponent<BoxCollider2D>();
+		Debug.Log(this.Player.BulletOffset);
 	}
-
+	
 	public void FixedUpdate () {
 		Rigidbody2D Rigidbody = this.GetComponent<Rigidbody2D>();
 		Rigidbody.AddForce (Rigidbody.gravityScale * -1 * Physics2D.gravity);
