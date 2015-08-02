@@ -50,12 +50,12 @@ public class ScreenWrap : MonoBehaviour {
 		this.InstantiateGhost("se");
 		this.InstantiateGhost("nw");
 		this.InstantiateGhost("sw");
-		this.DestroyComponent<ScreenWrap>();
+		this.DestroyGhostComponent<ScreenWrap>();
 		this.PositionGhosts ();
 		this.RotateGhosts ();
 	}
 	
-	public void DestroyComponent<T> () where T : Component {
+	public void DestroyGhostComponent<T> () where T : Component {
 		foreach(var entry in this.Ghosts) {
 			Destroy(this.Ghosts[entry.Key].GetComponent<T>());
 		}

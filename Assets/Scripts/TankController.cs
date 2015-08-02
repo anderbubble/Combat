@@ -36,7 +36,6 @@ public class TankController : MonoBehaviour {
 		return (move != 0);
 	}
 
-
 	void DampenVelocity () {
 		this.Rigidbody.velocity = Vector2.zero;
 		this.Rigidbody.angularVelocity = 0;

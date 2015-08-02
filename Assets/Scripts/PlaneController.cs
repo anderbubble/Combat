@@ -10,8 +10,8 @@ public class PlaneController : MonoBehaviour {
 		this.Player = this.GetComponent<PlayerController>();
 		var ScreenWrap = this.GetComponent<ScreenWrap>();
 		ScreenWrap.InstantiateGhosts();
-		ScreenWrap.DestroyComponent<PlaneController>();
-		ScreenWrap.DestroyComponent<Rigidbody2D>();
+		ScreenWrap.DestroyGhostComponent<PlaneController>();
+		ScreenWrap.DestroyGhostComponent<Rigidbody2D>();
 		Debug.Log(this.Player.BulletOffset);
 	}
 	
