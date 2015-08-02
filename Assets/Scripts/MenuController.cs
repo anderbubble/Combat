@@ -11,4 +11,9 @@ public class MenuController : MonoBehaviour {
 		this.GameController.ConfigureTanks(BouncingBullets: this.BouncingBullets.isOn);
 		Application.LoadLevel("Tanks");
 	}
+	
+	public void LoadPlanes () {
+		Destroy (this.GameController);
+		Application.LoadLevel("Planes");
+	}
 }
