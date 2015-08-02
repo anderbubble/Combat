@@ -6,14 +6,16 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
 	public Quaternion Forward;
 	public BulletController BulletTemplate;
-	private List<BulletController> Bullets;
 	public int MaxBullets = 1;
 	public float BulletSpeed = 9;
-	public Vector2 BulletOffset;
-	private bool loaded = true;
 	public float ReloadTime = 0;
 	public string FireButton = "Fire";
 	public Text ScoreUI;
+	public float BulletOffset = 0;
+	
+	Vector2 BulletOffsetVector;
+	bool loaded = true;
+	List<BulletController> Bullets;
 
 	public bool alive {
 		get {
@@ -35,8 +37,7 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		var edge = this.GetComponent<BoxCollider2D>().size.x / 2;
 		var radius = this.BulletTemplate.GetComponent<CircleCollider2D>().radius;
-		var fudge = .05f;
-		this.BulletOffset = this.Forward * ((edge + radius + fudge) * Vector2.up);
+		this.BulletOffsetVector = this.Forward * ((edge + radius + this.BulletOffset) * Vector2.up);
 	}
 	
 	void Update () {
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour {
 
 	void FireBullet () {
 		var Bullet =
-			Instantiate(this.BulletTemplate, this.transform.position + (this.transform.rotation * this.BulletOffset), this.transform.rotation * this.Forward)
+			Instantiate(this.BulletTemplate, this.transform.position + (this.transform.rotation * this.BulletOffsetVector), this.transform.rotation * this.Forward)
 				as BulletController;
 		Bullet.source = this;
 		Bullet.speed += this.BulletSpeed;

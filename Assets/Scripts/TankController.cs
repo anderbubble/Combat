@@ -7,18 +7,17 @@ public class TankController : MonoBehaviour {
 
 	public string TurnAxis = "Horizontal";
 	public string MoveAxis = "Vertical";
-	private PlayerController Player;
+	private PlayerController player;
 
 	void Start () {
-		this.Player = this.GetComponent<PlayerController>();
-		this.Player.BulletOffset = ((this.GetComponent<BoxCollider2D>().size.y / 2) + this.Player.BulletTemplate.GetComponent<CircleCollider2D>().radius + .05f) * Vector2.up;
+		this.player = this.GetComponent<PlayerController>();
 	}
 	
 	void Update () {
-		if (this.GetComponent<PlayerController>().alive) {
+		if (this.player.alive) {
 			var moving = MoveTank();
 			if (moving) {
-				this.GetComponent<PlayerController>().DampenVelocity();
+				this.player.DampenVelocity();
 			}
 		}
 	}

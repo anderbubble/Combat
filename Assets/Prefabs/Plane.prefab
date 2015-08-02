@@ -16,7 +16,7 @@ GameObject:
   - 114: {fileID: 11442472}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,10 +89,10 @@ MonoBehaviour:
   BulletTemplate: {fileID: 11408898, guid: c0767ccf1e6a94f2c8d1a727f2b92141, type: 2}
   MaxBullets: 1
   BulletSpeed: 9
-  BulletOffset: {x: .600000024, y: 0}
   ReloadTime: 0
   FireButton: Fire
   ScoreUI: {fileID: 0}
+  BulletOffset: .100000001
 --- !u!114 &11459070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,7 +149,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: TurnAxis
@@ -158,6 +158,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: FireButton
       value: Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BulletOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxBullets
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BulletOffset
+      value: .100000001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
