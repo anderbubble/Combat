@@ -7,7 +7,6 @@ public class TankController : MonoBehaviour {
 
 	public string TurnAxis = "Horizontal";
 	public string MoveAxis = "Vertical";
-	public GameObject Explosion;
 
 	private Rigidbody2D Rigidbody;
 	private PlayerController Player;
@@ -40,22 +39,10 @@ public class TankController : MonoBehaviour {
 		this.Rigidbody.velocity = Vector2.zero;
 		this.Rigidbody.angularVelocity = 0;
 	}
-	
+
 	void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.collider.tag == "Bullet") {
-			this.Explode ();
+			this.DampenVelocity();
 		}
-	}
-
-	public void Explode () {
-		this.DampenVelocity();
-		this.GetComponent<PlayerController>().alive = false;
-		Instantiate (this.Explosion, this.transform.position, Quaternion.identity);
-		StartCoroutine(this.WaitRespawn ());
-	}
-
-	IEnumerator WaitRespawn (float seconds=3) {
-		yield return new WaitForSeconds(seconds);
-		this.GetComponent<PlayerController>().alive = true;
 	}
 }

@@ -186,6 +186,7 @@ GameObject:
   - 114: {fileID: 832762574}
   - 114: {fileID: 832762575}
   - 114: {fileID: 832762576}
+  - 114: {fileID: 832762577}
   m_Layer: 0
   m_Name: GreenPlane
   m_TagString: Untagged
@@ -304,3 +305,15 @@ MonoBehaviour:
   ReloadTime: 0
   FireButton: P1Fire
   ScoreUI: {fileID: 0}
+--- !u!114 &832762577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 832762569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dbc37cd6042b4335ace416c19acfa32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Explosion: {fileID: 19889444, guid: 10d0351efb68a4d11aa13ef64a0b1292, type: 2}

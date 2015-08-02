@@ -13,7 +13,6 @@ public class PlaneController : MonoBehaviour {
 		ScreenWrap.InstantiateGhosts();
 		ScreenWrap.DestroyGhostComponent<PlaneController>();
 		ScreenWrap.DestroyGhostComponent<Rigidbody2D>();
-		Debug.Log(this.Player.BulletOffset);
 	}
 	
 	public void FixedUpdate () {
