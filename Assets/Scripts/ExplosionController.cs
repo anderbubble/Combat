@@ -18,6 +18,7 @@ public class ExplosionController : MonoBehaviour {
 	
 	void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.collider.tag == "Bullet") {
+			this.GetComponent<PlayerController>().DampenVelocity();
 			this.Explode ();
 		}
 	}

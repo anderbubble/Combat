@@ -89,4 +89,12 @@ public class PlayerController : MonoBehaviour {
 			this.ScoreUI.text = this._Score.ToString();
 		}
 	}
+
+	public void DampenVelocity () {
+		var rigidbody = this.GetComponent<Rigidbody2D>();
+		if (rigidbody != null) {
+			rigidbody.velocity = Vector2.zero;
+			rigidbody.angularVelocity = 0;
+		}
+	}
 }
