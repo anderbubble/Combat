@@ -20,14 +20,14 @@ public class TankController : MonoBehaviour {
 	
 	void Update () {
 		if (this.GetComponent<PlayerController>().alive) {
-			var moving = MovePlayer();
+			var moving = MoveTank();
 			if (moving) {
 				DampenVelocity();
 			}
 		}
 	}
 
-	bool MovePlayer () {
+	bool MoveTank () {
 		var turn = Input.GetAxis (this.TurnAxis);
 		var move = Input.GetAxis (this.MoveAxis);
 		var rotation = Quaternion.AngleAxis(-45 * turn * Time.deltaTime, Vector3.forward);

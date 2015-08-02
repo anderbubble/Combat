@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlaneController : MonoBehaviour {
 	public float speed = 1f;
+	public string TurnAxis = "Horizontal";
 
 	PlayerController Player;
 
@@ -21,6 +22,15 @@ public class PlaneController : MonoBehaviour {
 	}
 
 	public void Update () {
-		this.transform.position += (Time.deltaTime * Vector3.right * this.speed);
+		if (this.Player.alive) {
+			this.transform.position += this.transform.rotation * (Time.deltaTime * Vector3.right * this.speed);
+			TurnPlane ();
+		}
+	}
+	
+	void TurnPlane () {
+		var turn = Input.GetAxis (this.TurnAxis);
+		var rotation = Quaternion.AngleAxis(-45 * turn * Time.deltaTime, Vector3.forward);
+		this.transform.rotation *= rotation;
 	}
 }

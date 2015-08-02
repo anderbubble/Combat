@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  TurnAxis: P1Horizontal
 --- !u!114 &832762575
 MonoBehaviour:
   m_ObjectHideFlags: 0
