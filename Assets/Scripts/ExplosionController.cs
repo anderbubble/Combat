@@ -7,8 +7,16 @@ public class ExplosionController : MonoBehaviour {
 	
 	public void Explode () {
 		this.GetComponent<PlayerController>().alive = false;
-		Instantiate (this.Explosion, this.transform.position, Quaternion.identity);
+		var explosion = Instantiate (this.Explosion, this.transform.position, Quaternion.identity) as ParticleSystem;
+		StartCoroutine (this.CleanupExplosion(explosion));
 		StartCoroutine(this.WaitRespawn ());
+	}
+
+	IEnumerator CleanupExplosion (ParticleSystem explosion) {
+		while (explosion.IsAlive()) {
+			yield return new WaitForEndOfFrame();
+		}
+		Destroy (explosion.gameObject);
 	}
 
 	IEnumerator WaitRespawn (float seconds=3) {
