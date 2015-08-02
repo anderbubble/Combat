@@ -5,10 +5,20 @@ public class PlaneController : MonoBehaviour {
 	public float speed = 1f;
 	public string TurnAxis = "Horizontal";
 
-	PlayerController Player;
+	PlayerController player;
+	Collider2D collider;
 
 	public void Start () {
-		this.Player = this.GetComponent<PlayerController>();
+		this.player = this.GetComponent<PlayerController>();
+		this.collider = this.GetComponent<Collider2D>();
+		this.IgnorePlayerCollision();
+	}
+
+	void IgnorePlayerCollision () {
+		foreach (var plane in FindObjectsOfType<PlaneController>()) {
+			var collider = plane.GetComponent<Collider2D>();
+			Physics2D.IgnoreCollision(this.collider, collider);
+		}
 	}
 	
 	public void FixedUpdate () {
@@ -17,7 +27,7 @@ public class PlaneController : MonoBehaviour {
 	}
 
 	public void Update () {
-		if (this.Player.alive) {
+		if (this.player.alive) {
 			this.transform.position += this.transform.rotation * (Time.deltaTime * Vector3.right * this.speed);
 			TurnPlane ();
 		}
