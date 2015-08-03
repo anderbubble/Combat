@@ -217,6 +217,10 @@ Prefab:
       propertyPath: ScoreUI
       value: 
       objectReference: {fileID: 1271166723}
+    - target: {fileID: 11498208, guid: f61c81ed8913347f79b561470e0344c0, type: 2}
+      propertyPath: TurnAxis
+      value: P1Horizontal
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f61c81ed8913347f79b561470e0344c0, type: 2}
   m_IsPrefabParent: 0
@@ -677,6 +681,10 @@ Prefab:
       propertyPath: ScoreUI
       value: 
       objectReference: {fileID: 1372789830}
+    - target: {fileID: 11498208, guid: f61c81ed8913347f79b561470e0344c0, type: 2}
+      propertyPath: TurnAxis
+      value: P2Horizontal
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f61c81ed8913347f79b561470e0344c0, type: 2}
   m_IsPrefabParent: 0

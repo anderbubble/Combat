@@ -3,10 +3,8 @@ using System.Collections;
 
 public class Tank : MonoBehaviour
 {
-	public string TurnAxis = "Horizontal";
 	public string MoveAxis = "Vertical";
 	public float speed;
-	public float AngularSpeed;
 	Player player;
 
 	void Start ()
@@ -18,7 +16,6 @@ public class Tank : MonoBehaviour
 	{
 		if (this.player.alive) {
 			MoveTank ();
-			TurnTank ();
 		}
 	}
 
@@ -30,12 +27,5 @@ public class Tank : MonoBehaviour
 		if (move != 0) {
 			this.player.DampenVelocity ();
 		}
-	}
-
-	void TurnTank ()
-	{
-		var turn = -Input.GetAxis (this.TurnAxis);
-		var rotation = Quaternion.AngleAxis (Time.deltaTime * turn * this.AngularSpeed, Vector3.forward);
-		this.transform.rotation *= rotation;
 	}
 }

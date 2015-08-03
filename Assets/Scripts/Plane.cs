@@ -4,8 +4,6 @@ using System.Collections;
 public class Plane : MonoBehaviour
 {
 	public float speed;
-	public float AngularSpeed;
-	public string TurnAxis = "Horizontal";
 	Player player;
 	new Collider2D collider;
 	new Rigidbody2D rigidbody;
@@ -28,7 +26,6 @@ public class Plane : MonoBehaviour
 	{
 		if (this.player.alive) {
 			MovePlane ();
-			TurnPlane ();
 		}
 	}
 	
@@ -43,12 +40,5 @@ public class Plane : MonoBehaviour
 	void MovePlane ()
 	{
 		this.transform.position += Time.deltaTime * (this.speed * (this.transform.rotation * Vector3.right));
-	}
-	
-	void TurnPlane ()
-	{
-		var turn = -Input.GetAxis (this.TurnAxis);
-		var rotation = Quaternion.AngleAxis (Time.deltaTime * turn * this.AngularSpeed, Vector3.forward);
-		this.transform.rotation *= rotation;
 	}
 }

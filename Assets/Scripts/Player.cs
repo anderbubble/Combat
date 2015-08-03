@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
 	public Bullet BulletTemplate;
 	public int MaxBullets = 1;
 	public float BulletSpeed = 9;
+	public float AngularSpeed;
 	public float ReloadTime = 0;
+	public string TurnAxis = "Horizontal";
 	public string FireButton = "Fire";
 	public Text ScoreUI;
 	public float BulletOffset = 0;
@@ -73,7 +75,15 @@ public class Player : MonoBehaviour
 			if (this.loaded && Input.GetButtonDown (this.FireButton) && this.CountActiveBullets () < this.MaxBullets) {
 				FireBullet ();
 			}
+			this.Turn ();
 		}
+	}
+	
+	void Turn ()
+	{
+		var turn = -Input.GetAxis (this.TurnAxis);
+		var rotation = Quaternion.AngleAxis (Time.deltaTime * turn * this.AngularSpeed, Vector3.forward);
+		this.transform.rotation *= rotation;
 	}
 
 	void FireBullet ()

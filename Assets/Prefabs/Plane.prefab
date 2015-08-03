@@ -89,7 +89,9 @@ MonoBehaviour:
   BulletTemplate: {fileID: 11408898, guid: c0767ccf1e6a94f2c8d1a727f2b92141, type: 2}
   MaxBullets: 1
   BulletSpeed: 9
+  AngularSpeed: 180
   ReloadTime: 0
+  TurnAxis: Vertical
   FireButton: Fire
   ScoreUI: {fileID: 0}
   BulletOffset: .150000006
@@ -105,8 +107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  AngularSpeed: 180
-  TurnAxis: Vertical
 --- !u!212 &21263576
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -188,6 +188,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: speed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: AngularSpeed
+      value: 180
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
