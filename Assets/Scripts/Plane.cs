@@ -48,7 +48,7 @@ public class Plane : MonoBehaviour
 	void TurnPlane ()
 	{
 		var turn = -Input.GetAxis (this.TurnAxis);
-		var rotation = Quaternion.AngleAxis (Time.deltaTime * this.AngularSpeed * turn, Vector3.forward);
+		var rotation = Quaternion.AngleAxis (Time.deltaTime * turn * this.AngularSpeed, Vector3.forward);
 		this.transform.rotation *= rotation;
 	}
 }

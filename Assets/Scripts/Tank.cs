@@ -5,6 +5,8 @@ public class Tank : MonoBehaviour
 {
 	public string TurnAxis = "Horizontal";
 	public string MoveAxis = "Vertical";
+	public float speed;
+	public float AngularSpeed;
 	Player player;
 
 	void Start ()
@@ -15,20 +17,25 @@ public class Tank : MonoBehaviour
 	void Update ()
 	{
 		if (this.player.alive) {
-			var moving = MoveTank ();
-			if (moving) {
-				this.player.DampenVelocity ();
-			}
+			MoveTank ();
+			TurnTank ();
 		}
 	}
 
-	bool MoveTank ()
+	void MoveTank ()
 	{
-		var turn = Input.GetAxis (this.TurnAxis);
 		var move = Input.GetAxis (this.MoveAxis);
-		var rotation = Quaternion.AngleAxis (-45 * turn * Time.deltaTime, Vector3.forward);
+		this.transform.position += Time.deltaTime * move * (this.speed * (this.transform.rotation * Vector3.up));
+
+		if (move != 0) {
+			this.player.DampenVelocity ();
+		}
+	}
+
+	void TurnTank ()
+	{
+		var turn = -Input.GetAxis (this.TurnAxis);
+		var rotation = Quaternion.AngleAxis (Time.deltaTime * turn * this.AngularSpeed, Vector3.forward);
 		this.transform.rotation *= rotation;
-		this.transform.position += this.transform.rotation * Vector3.up * move * Time.deltaTime;
-		return move != 0;
 	}
 }
