@@ -5,15 +5,15 @@ using System.Collections;
 public class MenuController : MonoBehaviour {
 
 	public Toggle BouncingBullets;
-	public GameController GameController;
+	public GameController game;
 
 	public void LoadTanks () {
-		this.GameController.ConfigureTanks(BouncingBullets: this.BouncingBullets.isOn);
+		this.game.ConfigureTanks(BouncingBullets: this.BouncingBullets.isOn);
 		Application.LoadLevel("Tanks");
 	}
 	
 	public void LoadPlanes () {
-		Destroy (this.GameController);
+		Destroy (this.game);
 		Application.LoadLevel("Planes");
 	}
 }

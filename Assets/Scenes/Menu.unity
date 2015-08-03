@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BouncingBullets: {fileID: 287635554}
-  GameController: {fileID: 402588701}
+  game: {fileID: 402588701}
 --- !u!1 &922163652
 GameObject:
   m_ObjectHideFlags: 0

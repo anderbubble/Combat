@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ExplosionController : MonoBehaviour {
 
-	public ParticleSystem Explosion;
+	public ParticleSystem ExplosionTemplate;
 
 	PlayerController player;
 
@@ -13,16 +13,16 @@ public class ExplosionController : MonoBehaviour {
 	
 	public void Explode () {
 		this.player.alive = false;
-		var explosion = Instantiate (this.Explosion, this.transform.position, Quaternion.identity) as ParticleSystem;
-		StartCoroutine (this.CleanupExplosion(explosion));
-		StartCoroutine(this.WaitRespawn ());
+		var explosion = Instantiate(this.ExplosionTemplate, this.transform.position, Quaternion.identity) as ParticleSystem;
+		StartCoroutine(this.CleanupExplosion(explosion));
+		StartCoroutine(this.WaitRespawn());
 	}
 
 	IEnumerator CleanupExplosion (ParticleSystem explosion) {
 		while (explosion.IsAlive()) {
 			yield return new WaitForEndOfFrame();
 		}
-		Destroy (explosion.gameObject);
+		Destroy(explosion.gameObject);
 	}
 
 	IEnumerator WaitRespawn (float seconds=3) {
@@ -33,7 +33,7 @@ public class ExplosionController : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.collider.tag == "Bullet") {
 			this.player.DampenVelocity();
-			this.Explode ();
+			this.Explode();
 		}
 	}
 }

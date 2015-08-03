@@ -6,32 +6,35 @@ using System.Collections.Generic;
 public class ScreenWrap : MonoBehaviour {
 
 	Camera MainCamera;
+	Dictionary<string, Camera> ghosts;
 	
-	Vector3 screenBottomLeft {
+	Vector3 BottomLeft {
 		get {
 			return this.MainCamera.ViewportToWorldPoint(new Vector3(0, 0, this.transform.position.z));
 		}
 	}
 
-	Vector3 screenTopRight {
+	Vector3 TopRight {
 		get {
 			return this.MainCamera.ViewportToWorldPoint(new Vector3(1, 1, this.transform.position.z));
 		}
 	}
 	
-	float screenWidth {
+	float width {
 		get {
-			return this.screenTopRight.x - this.screenBottomLeft.x;
+			return this.TopRight.x - this.BottomLeft.x;
 		}
 	}
 
-	float screenHeight {
+	float height {
 		get {
-			return this.screenTopRight.y - this.screenBottomLeft.y;
+			return this.TopRight.y - this.BottomLeft.y;
 		}
 	}
-	
-	Dictionary<string, Camera> Ghosts = new Dictionary<string, Camera>();
+
+	void Awake () {
+		this.ghosts = new Dictionary<string, Camera>();
+	}
 
 	void Start () {
 		this.MainCamera = this.GetComponent<Camera>();
@@ -64,55 +67,55 @@ public class ScreenWrap : MonoBehaviour {
 	}
 
 	Camera InstantiateGhost (string position) {
-		this.Ghosts[position] = Instantiate(
+		this.ghosts[position] = Instantiate(
 			this.MainCamera, this.transform.position, this.transform.rotation) as Camera;
-		return this.Ghosts[position];
+		return this.ghosts[position];
 	}
 
 	void PositionGhosts () {
-		this.Ghosts["n"].transform.position = this.transform.position
-			+ new Vector3(0, this.screenHeight, 0);
-		this.Ghosts["s"].transform.position = this.transform.position
-			+ new Vector3(0, -this.screenHeight, 0);
-		this.Ghosts["e"].transform.position = this.transform.position
-			+ new Vector3(this.screenWidth, 0, 0);
-		this.Ghosts["w"].transform.position = this.transform.position
-			+ new Vector3(-this.screenWidth, 0, 0);
-		this.Ghosts["ne"].transform.position = this.transform.position
-			+ new Vector3(this.screenWidth, this.screenHeight, 0);
-		this.Ghosts["se"].transform.position = this.transform.position
-			+ new Vector3(-this.screenWidth, this.screenHeight, 0);
-		this.Ghosts["nw"].transform.position = this.transform.position
-			+ new Vector3(this.screenWidth, -this.screenHeight, 0);
-		this.Ghosts["sw"].transform.position = this.transform.position
-			+ new Vector3(this.screenWidth, -this.screenHeight, 0);
+		this.ghosts["n"].transform.position = this.transform.position
+			+ new Vector3(0, this.height, 0);
+		this.ghosts["s"].transform.position = this.transform.position
+			+ new Vector3(0, -this.height, 0);
+		this.ghosts["e"].transform.position = this.transform.position
+			+ new Vector3(this.width, 0, 0);
+		this.ghosts["w"].transform.position = this.transform.position
+			+ new Vector3(-this.width, 0, 0);
+		this.ghosts["ne"].transform.position = this.transform.position
+			+ new Vector3(this.width, this.height, 0);
+		this.ghosts["se"].transform.position = this.transform.position
+			+ new Vector3(-this.width, this.height, 0);
+		this.ghosts["nw"].transform.position = this.transform.position
+			+ new Vector3(this.width, -this.height, 0);
+		this.ghosts["sw"].transform.position = this.transform.position
+			+ new Vector3(this.width, -this.height, 0);
 	}
 
 	void RotateGhosts () {
-		this.Ghosts["n"].transform.rotation = this.transform.rotation;
-		this.Ghosts["s"].transform.rotation = this.transform.rotation;
-		this.Ghosts["e"].transform.rotation = this.transform.rotation;
-		this.Ghosts["w"].transform.rotation = this.transform.rotation;
-		this.Ghosts["ne"].transform.rotation = this.transform.rotation;
-		this.Ghosts["se"].transform.rotation = this.transform.rotation;
-		this.Ghosts["nw"].transform.rotation = this.transform.rotation;
-		this.Ghosts["sw"].transform.rotation = this.transform.rotation;
+		this.ghosts["n"].transform.rotation = this.transform.rotation;
+		this.ghosts["s"].transform.rotation = this.transform.rotation;
+		this.ghosts["e"].transform.rotation = this.transform.rotation;
+		this.ghosts["w"].transform.rotation = this.transform.rotation;
+		this.ghosts["ne"].transform.rotation = this.transform.rotation;
+		this.ghosts["se"].transform.rotation = this.transform.rotation;
+		this.ghosts["nw"].transform.rotation = this.transform.rotation;
+		this.ghosts["sw"].transform.rotation = this.transform.rotation;
 	}
 
 	void DestroyGhostComponent<T> () where T : Component {
-		foreach(var entry in this.Ghosts) {
-			Destroy(this.Ghosts[entry.Key].GetComponent<T>());
+		foreach(var entry in this.ghosts) {
+			Destroy(this.ghosts[entry.Key].GetComponent<T>());
 		}
 	}
 
 	void SetGhostClearFlags (CameraClearFlags clearFlags) {
-		foreach(var entry in this.Ghosts) {
+		foreach(var entry in this.ghosts) {
 			entry.Value.clearFlags = clearFlags;
 		}
 	}
 
 	void MoveObject (Renderer renderer) {
-		foreach(var entry in this.Ghosts) {
+		foreach(var entry in this.ghosts) {
 			if (VisibleFrom(renderer, entry.Value)) {
 				renderer.transform.position =
 					this.MainCamera.transform.position

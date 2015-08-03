@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
-	public Quaternion Forward;
+	public Quaternion forward;
 	public BulletController BulletTemplate;
 	public int MaxBullets = 1;
 	public float BulletSpeed = 9;
@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour {
 	
 	Vector2 BulletOffsetVector;
 	bool loaded = true;
-	List<BulletController> Bullets;
+	List<BulletController> bullets;
+	int _score = 0;
 	
 	new SpriteRenderer renderer;
 	new BoxCollider2D collider;
@@ -33,9 +34,23 @@ public class PlayerController : MonoBehaviour {
 			this.collider.enabled = value;
 		}
 	}
+	
+	public int score {
+		get {
+			return this._score;
+		}
+		
+		set {
+			this._score = value;
+			if (this._score < 0) {
+				this._score = 0;
+			}
+			this.ScoreUI.text = this._score.ToString();
+		}
+	}
 
 	void Awake () {
-		this.Bullets = new List<BulletController>();
+		this.bullets = new List<BulletController>();
 	}
 
 	void Start () {
@@ -45,7 +60,7 @@ public class PlayerController : MonoBehaviour {
 
 		var edge = this.collider.size.x / 2;
 		var radius = this.BulletTemplate.GetComponent<CircleCollider2D>().radius;
-		this.BulletOffsetVector = this.Forward * ((edge + radius + this.BulletOffset) * Vector2.up);
+		this.BulletOffsetVector = this.forward * ((edge + radius + this.BulletOffset) * Vector2.up);
 	}
 	
 	void Update () {
@@ -58,11 +73,11 @@ public class PlayerController : MonoBehaviour {
 
 	void FireBullet () {
 		var Bullet =
-			Instantiate(this.BulletTemplate, this.transform.position + (this.transform.rotation * this.BulletOffsetVector), this.transform.rotation * this.Forward)
+			Instantiate(this.BulletTemplate, this.transform.position + (this.transform.rotation * this.BulletOffsetVector), this.transform.rotation * this.forward)
 				as BulletController;
 		Bullet.source = this;
 		Bullet.speed += this.BulletSpeed;
-		this.Bullets.Add (Bullet);
+		this.bullets.Add (Bullet);
 		this.loaded = false;
 		StartCoroutine (this.Reload(this.ReloadTime));
 	}
@@ -74,29 +89,13 @@ public class PlayerController : MonoBehaviour {
 	
 	public void CleanupBullets ()
 	{
-		this.Bullets.RemoveAll (x => (((BulletController)x).Equals (null)));
+		this.bullets.RemoveAll (x => (((BulletController)x).Equals (null)));
 	}
 	
 	public int CountActiveBullets ()
 	{
 		this.CleanupBullets();
-		return this.Bullets.Count;
-	}
-	
-	private int _Score = 0;
-	
-	public int Score {
-		get {
-			return this._Score;
-		}
-		
-		set {
-			this._Score = value;
-			if (this._Score < 0) {
-				this._Score = 0;
-			}
-			this.ScoreUI.text = this._Score.ToString();
-		}
+		return this.bullets.Count;
 	}
 
 	public void DampenVelocity () {

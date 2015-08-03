@@ -37,9 +37,9 @@ public class BulletController : MonoBehaviour {
 		if (collision.collider.tag == "Player") {
 			var target = collision.collider.GetComponent<PlayerController>();
 			if (target == this.source) {
-				this.source.Score -= 1;
+				this.source.score -= 1;
 			} else {
-				this.source.Score += 1;
+				this.source.score += 1;
 			}
 			this.Explode ();
 		} else if (collision.collider.tag == "Barrier") {

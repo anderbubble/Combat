@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dbc37cd6042b4335ace416c19acfa32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Explosion: {fileID: 19889444, guid: 10d0351efb68a4d11aa13ef64a0b1292, type: 2}
+  ExplosionTemplate: {fileID: 19889444, guid: 10d0351efb68a4d11aa13ef64a0b1292, type: 2}
 --- !u!114 &11457702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73887462bf6194c74aa6e0bf48cea636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Forward: {x: 0, y: 0, z: -.699999988, w: .699999988}
+  forward: {x: 0, y: 0, z: -.699999988, w: .699999988}
   BulletTemplate: {fileID: 11408898, guid: c0767ccf1e6a94f2c8d1a727f2b92141, type: 2}
   MaxBullets: 1
   BulletSpeed: 9
@@ -170,6 +170,19 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: BulletOffset
       value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ExplosionTemplate
+      value: 
+      objectReference: {fileID: 19889444, guid: 10d0351efb68a4d11aa13ef64a0b1292,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: forward.z
+      value: -.699999988
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: forward.w
+      value: .699999988
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

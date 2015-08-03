@@ -16,13 +16,6 @@ public class PlaneController : MonoBehaviour {
 
 		this.IgnorePlayerCollision();
 	}
-
-	void IgnorePlayerCollision () {
-		foreach (var plane in FindObjectsOfType<PlaneController>()) {
-			var otherCollider = plane.collider;
-			Physics2D.IgnoreCollision(this.collider, otherCollider);
-		}
-	}
 	
 	public void FixedUpdate () {
 		this.rigidbody.AddForce (this.rigidbody.gravityScale * -1 * Physics2D.gravity);
@@ -32,6 +25,13 @@ public class PlaneController : MonoBehaviour {
 		if (this.player.alive) {
 			this.transform.position += this.transform.rotation * (Time.deltaTime * Vector3.right * this.speed);
 			TurnPlane ();
+		}
+	}
+	
+	void IgnorePlayerCollision () {
+		foreach (var plane in FindObjectsOfType<PlaneController>()) {
+			var otherCollider = plane.collider;
+			Physics2D.IgnoreCollision(this.collider, otherCollider);
 		}
 	}
 	

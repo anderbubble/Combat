@@ -7,7 +7,8 @@ public class TankController : MonoBehaviour {
 
 	public string TurnAxis = "Horizontal";
 	public string MoveAxis = "Vertical";
-	private PlayerController player;
+
+	PlayerController player;
 
 	void Start () {
 		this.player = this.GetComponent<PlayerController>();
