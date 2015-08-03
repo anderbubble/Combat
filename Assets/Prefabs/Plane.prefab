@@ -104,7 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3aa274946e67453298ca75e810f2769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 5
+  AngularSpeed: 180
   TurnAxis: Vertical
 --- !u!212 &21263576
 SpriteRenderer:
@@ -183,6 +184,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: forward.w
       value: .699999988
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
