@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class MenuController : MonoBehaviour {
-
 	public Toggle BouncingBullets;
 	public GameController game;
 

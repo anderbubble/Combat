@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class ExplosionController : MonoBehaviour {
-
 	public ParticleSystem ExplosionTemplate;
 
 	PlayerController player;
@@ -30,7 +29,7 @@ public class ExplosionController : MonoBehaviour {
 		this.player.alive = true;
 	}
 	
-	void OnCollisionEnter2D(Collision2D collision) {
+	void OnCollisionEnter2D (Collision2D collision) {
 		if (collision.collider.tag == "Bullet") {
 			this.player.DampenVelocity();
 			this.Explode();

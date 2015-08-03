@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class BulletController : MonoBehaviour {
-
 	public PlayerController source;
 	public float speed = 1;
 	public float lifespan = 1;

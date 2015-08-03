@@ -3,9 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ScreenWrap : MonoBehaviour
-{
-
+public class ScreenWrap : MonoBehaviour {
 	Camera MainCamera;
 	Dictionary<string, Camera> ghosts;
 	

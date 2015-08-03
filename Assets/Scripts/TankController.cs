@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TankController : MonoBehaviour {
-
 	public string TurnAxis = "Horizontal";
 	public string MoveAxis = "Vertical";
 
