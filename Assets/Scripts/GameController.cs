@@ -17,13 +17,13 @@ public class GameController : MonoBehaviour {
 	}
 
 	private IEnumerator ConfigureBouncingBullets () {
-		GameObject [] players = GameObject.FindGameObjectsWithTag("Player");
+		var players = FindObjectsOfType<PlayerController>();
 		while (players.Length < 1) {
 			yield return new WaitForEndOfFrame();
-			players = GameObject.FindGameObjectsWithTag("Player");
+			players = FindObjectsOfType<PlayerController>();
 		}
-		foreach (var Player in players) {
-			Player.GetComponent<PlayerController>().BulletTemplate = this.BouncyBulletTemplate;
+		foreach (var player in players) {
+			player.BulletTemplate = this.BouncyBulletTemplate;
 		}
 		Destroy(this.gameObject);
 	}

@@ -107,7 +107,7 @@ public class ScreenWrap : MonoBehaviour {
 
 	void SetGhostClearFlags (CameraClearFlags clearFlags) {
 		foreach(var entry in this.Ghosts) {
-			entry.Value.GetComponent<Camera>().clearFlags = clearFlags;
+			entry.Value.clearFlags = clearFlags;
 		}
 	}
 

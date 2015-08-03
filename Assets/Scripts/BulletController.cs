@@ -7,11 +7,19 @@ public class BulletController : MonoBehaviour {
 	public float speed = 1;
 	public float lifespan = 1;
 
-	private float fired;
+	float fired;
+
+	new Collider2D collider;
+	new Rigidbody2D rigidbody;
+
+	void Awake () {
+		this.fired = Time.time;
+	}
 
 	void Start () {
-		this.fired = Time.time;
-		this.GetComponent<Rigidbody2D>().velocity = (this.transform.rotation * Vector2.up * this.speed);
+		this.collider = this.GetComponent<Collider2D>();
+		this.rigidbody = this.GetComponent<Rigidbody2D>();
+		this.rigidbody.velocity = (this.transform.rotation * Vector2.up * this.speed);
 	}
 	
 	void Update () {
@@ -35,7 +43,7 @@ public class BulletController : MonoBehaviour {
 			}
 			this.Explode ();
 		} else if (collision.collider.tag == "Barrier") {
-			if (this.GetComponent<Collider2D>().sharedMaterial == null) {
+			if (this.collider.sharedMaterial == null) {
 				this.Explode ();
 			}
 		} else {

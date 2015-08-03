@@ -7,23 +7,25 @@ public class PlaneController : MonoBehaviour {
 
 	PlayerController player;
 	new Collider2D collider;
+	new Rigidbody2D rigidbody;
 
 	public void Start () {
 		this.player = this.GetComponent<PlayerController>();
 		this.collider = this.GetComponent<Collider2D>();
+		this.rigidbody = this.GetComponent<Rigidbody2D>();
+
 		this.IgnorePlayerCollision();
 	}
 
 	void IgnorePlayerCollision () {
 		foreach (var plane in FindObjectsOfType<PlaneController>()) {
-			var otherCollider = plane.GetComponent<Collider2D>();
+			var otherCollider = plane.collider;
 			Physics2D.IgnoreCollision(this.collider, otherCollider);
 		}
 	}
 	
 	public void FixedUpdate () {
-		Rigidbody2D Rigidbody = this.GetComponent<Rigidbody2D>();
-		Rigidbody.AddForce (Rigidbody.gravityScale * -1 * Physics2D.gravity);
+		this.rigidbody.AddForce (this.rigidbody.gravityScale * -1 * Physics2D.gravity);
 	}
 
 	public void Update () {

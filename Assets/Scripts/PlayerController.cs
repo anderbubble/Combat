@@ -16,17 +16,21 @@ public class PlayerController : MonoBehaviour {
 	Vector2 BulletOffsetVector;
 	bool loaded = true;
 	List<BulletController> Bullets;
+	
+	new SpriteRenderer renderer;
+	new BoxCollider2D collider;
+	new Rigidbody2D rigidbody;
 
 	public bool alive {
 		get {
 			return (
-				this.GetComponent<SpriteRenderer>().enabled
-				&& this.GetComponent<BoxCollider2D>().enabled);
+				this.renderer.enabled
+				&& this.collider.enabled);
 		}
 		
 		set {
-			this.GetComponent<SpriteRenderer>().enabled = value;
-			this.GetComponent<BoxCollider2D>().enabled = value;
+			this.renderer.enabled = value;
+			this.collider.enabled = value;
 		}
 	}
 
@@ -35,7 +39,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Start () {
-		var edge = this.GetComponent<BoxCollider2D>().size.x / 2;
+		this.renderer = this.GetComponent<SpriteRenderer>();
+		this.collider = this.GetComponent<BoxCollider2D>();
+		this.rigidbody = this.GetComponent<Rigidbody2D>();
+
+		var edge = this.collider.size.x / 2;
 		var radius = this.BulletTemplate.GetComponent<CircleCollider2D>().radius;
 		this.BulletOffsetVector = this.Forward * ((edge + radius + this.BulletOffset) * Vector2.up);
 	}
@@ -92,10 +100,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void DampenVelocity () {
-		var rigidbody = this.GetComponent<Rigidbody2D>();
-		if (rigidbody != null) {
-			rigidbody.velocity = Vector2.zero;
-			rigidbody.angularVelocity = 0;
-		}
+		rigidbody.velocity = Vector2.zero;
+		rigidbody.angularVelocity = 0;
 	}
 }
