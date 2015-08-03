@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ExplosionController : MonoBehaviour
+public class Explosion : MonoBehaviour
 {
 	public ParticleSystem ExplosionTemplate;
-	PlayerController player;
+	Player player;
 
 	void Start ()
 	{
-		this.player = this.GetComponent<PlayerController> ();
+		this.player = this.GetComponent<Player> ();
 	}
 	
 	public void Explode ()

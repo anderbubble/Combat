@@ -2,10 +2,10 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class MenuController : MonoBehaviour
+public class Menu : MonoBehaviour
 {
 	public Toggle BouncingBullets;
-	public GameController game;
+	public Game game;
 
 	public void LoadTanks ()
 	{

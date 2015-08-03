@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BulletController : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
-	public PlayerController source;
+	public Player source;
 	public float speed = 1;
 	public float lifespan = 1;
 	float fired;
@@ -38,7 +38,7 @@ public class BulletController : MonoBehaviour
 	void OnCollisionEnter2D (Collision2D collision)
 	{
 		if (collision.collider.tag == "Player") {
-			var target = collision.collider.GetComponent<PlayerController> ();
+			var target = collision.collider.GetComponent<Player> ();
 			if (target == this.source) {
 				this.source.score -= 1;
 			} else {

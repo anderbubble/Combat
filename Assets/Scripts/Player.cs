@@ -3,10 +3,10 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
 	public Quaternion forward;
-	public BulletController BulletTemplate;
+	public Bullet BulletTemplate;
 	public int MaxBullets = 1;
 	public float BulletSpeed = 9;
 	public float ReloadTime = 0;
@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 	public Text ScoreUI;
 	public float BulletOffset = 0;
 	bool loaded = true;
-	List<BulletController> bullets;
+	List<Bullet> bullets;
 	int _score = 0;
 	new SpriteRenderer renderer;
 	new BoxCollider2D collider;
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
 	void Awake ()
 	{
-		this.bullets = new List<BulletController> ();
+		this.bullets = new List<Bullet> ();
 	}
 
 	void Start ()
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
 	{
 		var Bullet =
 			Instantiate (this.BulletTemplate, this.transform.position + (this.transform.rotation * this.BulletOffsetVector), this.transform.rotation * this.forward)
-				as BulletController;
+				as Bullet;
 		Bullet.source = this;
 		Bullet.speed += this.BulletSpeed;
 		this.bullets.Add (Bullet);

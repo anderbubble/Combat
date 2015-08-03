@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameController : MonoBehaviour
+public class Game : MonoBehaviour
 {
-	public BulletController BouncyBulletTemplate;
+	public Bullet BouncyBulletTemplate;
 
 	public void Start ()
 	{
@@ -21,10 +21,10 @@ public class GameController : MonoBehaviour
 
 	private IEnumerator ConfigureBouncingBullets ()
 	{
-		var players = FindObjectsOfType<PlayerController> ();
+		var players = FindObjectsOfType<Player> ();
 		while (players.Length < 1) {
 			yield return new WaitForEndOfFrame ();
-			players = FindObjectsOfType<PlayerController> ();
+			players = FindObjectsOfType<Player> ();
 		}
 		foreach (var player in players) {
 			player.BulletTemplate = this.BouncyBulletTemplate;

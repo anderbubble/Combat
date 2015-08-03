@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlaneController : MonoBehaviour
+public class Plane : MonoBehaviour
 {
 	public float speed = 1f;
 	public string TurnAxis = "Horizontal";
-	PlayerController player;
+	Player player;
 	new Collider2D collider;
 	new Rigidbody2D rigidbody;
 
 	public void Start ()
 	{
-		this.player = this.GetComponent<PlayerController> ();
+		this.player = this.GetComponent<Player> ();
 		this.collider = this.GetComponent<Collider2D> ();
 		this.rigidbody = this.GetComponent<Rigidbody2D> ();
 
@@ -33,7 +33,7 @@ public class PlaneController : MonoBehaviour
 	
 	void IgnorePlayerCollision ()
 	{
-		foreach (var plane in FindObjectsOfType<PlaneController>()) {
+		foreach (var plane in FindObjectsOfType<Plane>()) {
 			var otherCollider = plane.collider;
 			Physics2D.IgnoreCollision (this.collider, otherCollider);
 		}
