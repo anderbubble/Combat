@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void DampenVelocity () {
-		rigidbody.velocity = Vector2.zero;
-		rigidbody.angularVelocity = 0;
+		this.rigidbody.velocity = Vector2.zero;
+		this.rigidbody.angularVelocity = 0;
 	}
 }
