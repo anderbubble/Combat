@@ -92,7 +92,7 @@ MonoBehaviour:
   ReloadTime: 0
   FireButton: Fire
   ScoreUI: {fileID: 0}
-  BulletOffset: .100000001
+  BulletOffset: .150000006
 --- !u!114 &11459070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,7 +169,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: BulletOffset
-      value: .100000001
+      value: .150000006
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ExplosionTemplate

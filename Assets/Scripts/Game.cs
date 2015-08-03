@@ -1,34 +1,55 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Game : MonoBehaviour
 {
 	public Bullet BouncyBulletTemplate;
+	Player [] players;
 
 	public void Start ()
 	{
 		DontDestroyOnLoad (this);
 	}
 
-	public void ConfigureTanks (bool BouncingBullets=false)
+	IEnumerator DestroyAfter (params Coroutine[] coroutines)
 	{
-		if (BouncingBullets) {
-			StartCoroutine (this.ConfigureBouncingBullets ());
-		} else {
-			Destroy (this.gameObject);
+		foreach (var coroutine in coroutines) {
+			yield return coroutine;
+		}
+		Destroy (this);
+	}
+
+	public void LoadTanks (bool BouncingBullets=false)
+	{
+		StartCoroutine (this.DestroyAfter (
+			StartCoroutine (this.ConfigureTanks (BouncingBullets: BouncingBullets))));
+		Application.LoadLevel ("Tanks");
+	}
+
+	IEnumerator ConfigureTanks (bool BouncingBullets=false)
+	{
+		if (BouncingBullets)
+		{
+			yield return StartCoroutine(this.WaitForPlayers());
+			foreach (var player in this.players) {
+				player.BulletTemplate = this.BouncyBulletTemplate;
+			}
 		}
 	}
 
-	private IEnumerator ConfigureBouncingBullets ()
+	public void LoadPlanes ()
 	{
-		var players = FindObjectsOfType<Player> ();
-		while (players.Length < 1) {
+		Application.LoadLevel ("Planes");
+		Destroy (this);
+	}
+
+	IEnumerator WaitForPlayers ()
+	{
+		this.players = FindObjectsOfType<Player> ();
+		while (this.players.Length < 1) {
 			yield return new WaitForEndOfFrame ();
-			players = FindObjectsOfType<Player> ();
+			this.players = FindObjectsOfType<Player> ();
 		}
-		foreach (var player in players) {
-			player.BulletTemplate = this.BouncyBulletTemplate;
-		}
-		Destroy (this.gameObject);
 	}
 }

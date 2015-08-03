@@ -9,13 +9,11 @@ public class Menu : MonoBehaviour
 
 	public void LoadTanks ()
 	{
-		this.game.ConfigureTanks (BouncingBullets: this.BouncingBullets.isOn);
-		Application.LoadLevel ("Tanks");
+		this.game.LoadTanks (BouncingBullets: this.BouncingBullets.isOn);
 	}
 	
 	public void LoadPlanes ()
 	{
-		Destroy (this.game);
-		Application.LoadLevel ("Planes");
+		this.game.LoadPlanes ();
 	}
 }
