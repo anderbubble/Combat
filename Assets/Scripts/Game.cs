@@ -17,7 +17,7 @@ public class Game : MonoBehaviour
 		foreach (var coroutine in coroutines) {
 			yield return coroutine;
 		}
-		Destroy (this);
+		Destroy (this.gameObject);
 	}
 
 	public void LoadTanks (bool BouncingBullets=false)
