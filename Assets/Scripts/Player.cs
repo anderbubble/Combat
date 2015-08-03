@@ -18,9 +18,9 @@ public class Player : MonoBehaviour
 	bool loaded = true;
 	List<Bullet> bullets;
 	int _score = 0;
-	new SpriteRenderer renderer;
-	new BoxCollider2D collider;
-	new Rigidbody2D rigidbody;
+	SpriteRenderer renderer;
+	BoxCollider2D collider;
+	Rigidbody2D rigidbody;
 
 	public bool alive {
 		get {

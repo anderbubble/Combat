@@ -5,8 +5,8 @@ public class Plane : MonoBehaviour
 {
 	public float speed;
 	Player player;
-	new Collider2D collider;
-	new Rigidbody2D rigidbody;
+	Collider2D collider;
+	Rigidbody2D rigidbody;
 
 	public void Start ()
 	{

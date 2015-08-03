@@ -7,8 +7,8 @@ public class Bullet : MonoBehaviour
 	public float speed = 1;
 	public float lifespan = 1;
 	float fired;
-	new Collider2D collider;
-	new Rigidbody2D rigidbody;
+	Collider2D collider;
+	Rigidbody2D rigidbody;
 
 	void Awake ()
 	{
