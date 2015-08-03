@@ -1,52 +1,56 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BulletController : MonoBehaviour {
+public class BulletController : MonoBehaviour
+{
 	public PlayerController source;
 	public float speed = 1;
 	public float lifespan = 1;
-
 	float fired;
-
 	new Collider2D collider;
 	new Rigidbody2D rigidbody;
 
-	void Awake () {
+	void Awake ()
+	{
 		this.fired = Time.time;
 	}
 
-	void Start () {
-		this.collider = this.GetComponent<Collider2D>();
-		this.rigidbody = this.GetComponent<Rigidbody2D>();
+	void Start ()
+	{
+		this.collider = this.GetComponent<Collider2D> ();
+		this.rigidbody = this.GetComponent<Rigidbody2D> ();
 		this.rigidbody.velocity = this.transform.rotation * Vector2.up * this.speed;
 	}
 	
-	void Update () {
+	void Update ()
+	{
 		if (Time.time >= this.fired + this.lifespan) {
-			this.Explode();
+			this.Explode ();
 		}
 	}
 
-	void Explode () {
-		this.gameObject.SetActive(false);
-		Destroy(this.gameObject);
+	void Explode ()
+	{
+		this.gameObject.SetActive (false);
+		Destroy (this.gameObject);
 	}
 
-	void OnCollisionEnter2D(Collision2D collision) {
+	void OnCollisionEnter2D (Collision2D collision)
+	{
 		if (collision.collider.tag == "Player") {
-			var target = collision.collider.GetComponent<PlayerController>();
+			var target = collision.collider.GetComponent<PlayerController> ();
 			if (target == this.source) {
 				this.source.score -= 1;
 			} else {
 				this.source.score += 1;
 			}
-			this.Explode();
+			this.Explode ();
 		} else if (collision.collider.tag == "Barrier") {
 			if (this.collider.sharedMaterial == null) {
-				this.Explode();
+				this.Explode ();
 			}
 		} else {
-			this.Explode();
+			this.Explode ();
 		}
 	}
 }
