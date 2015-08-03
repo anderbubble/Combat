@@ -13,7 +13,7 @@ public class MenuController : MonoBehaviour {
 	}
 	
 	public void LoadPlanes () {
-		Destroy (this.game);
+		Destroy(this.game);
 		Application.LoadLevel("Planes");
 	}
 }

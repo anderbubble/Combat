@@ -10,9 +10,9 @@ public class GameController : MonoBehaviour {
 
 	public void ConfigureTanks (bool BouncingBullets=false) {
 		if (BouncingBullets) {
-			StartCoroutine(this.ConfigureBouncingBullets ());
+			StartCoroutine(this.ConfigureBouncingBullets());
 		} else {
-			Destroy (this.gameObject);
+			Destroy(this.gameObject);
 		}
 	}
 

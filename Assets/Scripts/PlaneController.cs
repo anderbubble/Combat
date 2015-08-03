@@ -18,13 +18,13 @@ public class PlaneController : MonoBehaviour {
 	}
 	
 	public void FixedUpdate () {
-		this.rigidbody.AddForce (this.rigidbody.gravityScale * -1 * Physics2D.gravity);
+		this.rigidbody.AddForce(this.rigidbody.gravityScale * -1 * Physics2D.gravity);
 	}
 
 	public void Update () {
 		if (this.player.alive) {
-			this.transform.position += this.transform.rotation * (Time.deltaTime * Vector3.right * this.speed);
-			TurnPlane ();
+			this.transform.position += Time.deltaTime * (this.transform.rotation * Vector3.right * this.speed);
+			TurnPlane();
 		}
 	}
 	
@@ -36,7 +36,7 @@ public class PlaneController : MonoBehaviour {
 	}
 	
 	void TurnPlane () {
-		var turn = Input.GetAxis (this.TurnAxis);
+		var turn = Input.GetAxis(this.TurnAxis);
 		var rotation = Quaternion.AngleAxis(-45 * turn * Time.deltaTime, Vector3.forward);
 		this.transform.rotation *= rotation;
 	}

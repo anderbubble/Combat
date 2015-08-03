@@ -19,18 +19,18 @@ public class BulletController : MonoBehaviour {
 	void Start () {
 		this.collider = this.GetComponent<Collider2D>();
 		this.rigidbody = this.GetComponent<Rigidbody2D>();
-		this.rigidbody.velocity = (this.transform.rotation * Vector2.up * this.speed);
+		this.rigidbody.velocity = this.transform.rotation * Vector2.up * this.speed;
 	}
 	
 	void Update () {
 		if (Time.time >= this.fired + this.lifespan) {
-			this.Explode ();
+			this.Explode();
 		}
 	}
 
 	void Explode () {
-		this.gameObject.SetActive (false);
-		Destroy (this.gameObject);
+		this.gameObject.SetActive(false);
+		Destroy(this.gameObject);
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
@@ -41,13 +41,13 @@ public class BulletController : MonoBehaviour {
 			} else {
 				this.source.score += 1;
 			}
-			this.Explode ();
+			this.Explode();
 		} else if (collision.collider.tag == "Barrier") {
 			if (this.collider.sharedMaterial == null) {
-				this.Explode ();
+				this.Explode();
 			}
 		} else {
-			this.Explode ();
+			this.Explode();
 		}
 	}
 }

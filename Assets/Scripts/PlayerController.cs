@@ -12,8 +12,7 @@ public class PlayerController : MonoBehaviour {
 	public string FireButton = "Fire";
 	public Text ScoreUI;
 	public float BulletOffset = 0;
-	
-	Vector2 BulletOffsetVector;
+
 	bool loaded = true;
 	List<BulletController> bullets;
 	int _score = 0;
@@ -24,9 +23,9 @@ public class PlayerController : MonoBehaviour {
 
 	public bool alive {
 		get {
-			return (
+			return
 				this.renderer.enabled
-				&& this.collider.enabled);
+				&& this.collider.enabled;
 		}
 		
 		set {
@@ -49,6 +48,14 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	Vector2 BulletOffsetVector {
+		get {
+			var edge = this.collider.size.x / 2;
+			var radius = this.BulletTemplate.GetComponent<CircleCollider2D>().radius;
+			return this.forward * ((edge + radius + this.BulletOffset) * Vector2.up);
+		}
+	}
+
 	void Awake () {
 		this.bullets = new List<BulletController>();
 	}
@@ -57,15 +64,11 @@ public class PlayerController : MonoBehaviour {
 		this.renderer = this.GetComponent<SpriteRenderer>();
 		this.collider = this.GetComponent<BoxCollider2D>();
 		this.rigidbody = this.GetComponent<Rigidbody2D>();
-
-		var edge = this.collider.size.x / 2;
-		var radius = this.BulletTemplate.GetComponent<CircleCollider2D>().radius;
-		this.BulletOffsetVector = this.forward * ((edge + radius + this.BulletOffset) * Vector2.up);
 	}
 	
 	void Update () {
 		if (this.alive) {
-			if (this.loaded && Input.GetButtonDown (this.FireButton) && this.CountActiveBullets() < this.MaxBullets) {
+			if (this.loaded && Input.GetButtonDown(this.FireButton) && this.CountActiveBullets() < this.MaxBullets) {
 				FireBullet();
 			}
 		}
@@ -77,9 +80,9 @@ public class PlayerController : MonoBehaviour {
 				as BulletController;
 		Bullet.source = this;
 		Bullet.speed += this.BulletSpeed;
-		this.bullets.Add (Bullet);
+		this.bullets.Add(Bullet);
 		this.loaded = false;
-		StartCoroutine (this.Reload(this.ReloadTime));
+		StartCoroutine(this.Reload(this.ReloadTime));
 	}
 	
 	IEnumerator Reload (float seconds) {
@@ -89,7 +92,7 @@ public class PlayerController : MonoBehaviour {
 	
 	public void CleanupBullets ()
 	{
-		this.bullets.RemoveAll (x => (((BulletController)x).Equals (null)));
+		this.bullets.RemoveAll(x => x == null);
 	}
 	
 	public int CountActiveBullets ()
