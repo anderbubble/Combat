@@ -6,7 +6,7 @@ public class PlaneController : MonoBehaviour {
 	public string TurnAxis = "Horizontal";
 
 	PlayerController player;
-	Collider2D collider;
+	new Collider2D collider;
 
 	public void Start () {
 		this.player = this.GetComponent<PlayerController>();
@@ -16,8 +16,8 @@ public class PlaneController : MonoBehaviour {
 
 	void IgnorePlayerCollision () {
 		foreach (var plane in FindObjectsOfType<PlaneController>()) {
-			var collider = plane.GetComponent<Collider2D>();
-			Physics2D.IgnoreCollision(this.collider, collider);
+			var otherCollider = plane.GetComponent<Collider2D>();
+			Physics2D.IgnoreCollision(this.collider, otherCollider);
 		}
 	}
 	
