@@ -61,7 +61,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: .5}
 --- !u!114 &11442472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,7 +94,7 @@ MonoBehaviour:
   TurnAxis: Vertical
   FireButton: Fire
   ScoreUI: {fileID: 0}
-  BulletOffset: .150000006
+  BulletOffset: .300000012
 --- !u!114 &11459070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,7 +170,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: BulletOffset
-      value: .150000006
+      value: .300000012
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ExplosionTemplate
@@ -192,6 +192,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: AngularSpeed
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.y
+      value: .5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
